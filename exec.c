@@ -66,7 +66,7 @@ exec(char *path, char **argv)
   // begin CS153, lab3 changes
   sz = PGROUNDUP(sz);
   tempSize = sz;
-  if((sz = allocuvm(pgdir, KERNBASE - PGSZIE, KERNBASE - 1)) == 0)
+  if((sz = allocuvm(pgdir, KERNBASE - PGSIZE, KERNBASE - 1)) == 0)
     goto bad;
   sz = tempSize;
   sp = KERNBASE - 1; 	// this allows stack to grow down

@@ -330,7 +330,7 @@ copyuvm(pde_t *pgdir, uint sz, uint stackSize)
       panic("copyuvm: page not present 1");
     }
     pa = PTE_ADDR(*pte);
-    flages = PTE_FLAGS(*pte);
+    flags = PTE_FLAGS(*pte);
     if((mem = kalloc()) == 0){
       goto bad;
     }
@@ -351,7 +351,7 @@ copyuvm(pde_t *pgdir, uint sz, uint stackSize)
     memmove(mem, (char*)P2V(pa), PGSIZE);
     if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) < 0)
       goto bad;
-     -- stackSize;
+      stackSize --;
   }
   return d;
 
