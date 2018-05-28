@@ -166,11 +166,7 @@ UPROGS=\
 	_grep\
 	_init\
 	_kill\
-<<<<<<< HEAD
-	_lab3test\
-=======
 	_lab3\
->>>>>>> 617f2b2236cfd1ca21045c922446a76c8c0bd5c5
 	_ln\
 	_ls\
 	_mkdir\
