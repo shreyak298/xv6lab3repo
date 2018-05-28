@@ -61,12 +61,12 @@ int
 argptr(int n, char **pp, int size)
 {
   int i;
-  struct proc *curproc = myproc();
+  //struct proc *curproc = myproc(); \\CS153, lab3
  
   if(argint(n, &i) < 0)
     return -1;
-  if(size < 0 || (uint)i >= curproc->sz || (uint)i+size > curproc->sz)
-    return -1;
+  //if(size < 0 || (uint)i >= curproc->sz || (uint)i+size > curproc->sz)
+    //return -1; //commenting is part of CS153, lab3
   *pp = (char*)i;
   return 0;
 }
