@@ -13,6 +13,7 @@ exec(char *path, char **argv)
   char *s, *last;
   int i, off;
   uint argc, sz, sp, ustack[3+MAXARG+1];
+  uint tempSize;	//CS153, lab3
   struct elfhdr elf;
   struct inode *ip;
   struct proghdr ph;
@@ -62,11 +63,15 @@ exec(char *path, char **argv)
 
   // Allocate two pages at the next page boundary.
   // Make the first inaccessible.  Use the second as the user stack.
+  // begin CS153, lab3 changes
   sz = PGROUNDUP(sz);
-  if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)
+  tempSize = sz;
+  if((sz = allocuvm(pgdir, KERNBASE - PGSZIE, KERNBASE - 1)) == 0)
     goto bad;
-  clearpteu(pgdir, (char*)(sz - 2*PGSIZE));
-  sp = sz;
+  sz = tempSize;
+  sp = KERNBASE - 1; 	// this allows stack to grow down
+  curproc -> stackSize = 1;
+  //end CS153, lab3 changes
 
   // Push argument strings, prepare rest of stack in ustack.
   for(argc = 0; argv[argc]; argc++) {

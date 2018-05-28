@@ -17,10 +17,11 @@
 int
 fetchint(uint addr, int *ip)
 {
-  struct proc *curproc = myproc();
+  //Commenting out code is part of CS153, lab3
+  //struct proc *curproc = myproc();
 
-  if(addr >= curproc->sz || addr+4 > curproc->sz)
-    return -1;
+  //if(addr >= curproc->sz || addr+4 > curproc->sz)
+    //return -1;
   *ip = *(int*)(addr);
   return 0;
 }
@@ -32,10 +33,11 @@ int
 fetchstr(uint addr, char **pp)
 {
   char *s, *ep;
-  struct proc *curproc = myproc();
+  //Commenting out code is part of CS153, lab3
+ // struct proc *curproc = myproc();
 
-  if(addr >= curproc->sz)
-    return -1;
+  //if(addr >= curproc->sz)
+    //return -1;
   *pp = (char*)addr;
   ep = (char*)curproc->sz;
   for(s = *pp; s < ep; s++){
