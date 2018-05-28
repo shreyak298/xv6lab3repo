@@ -166,7 +166,7 @@ UPROGS=\
 	_grep\
 	_init\
 	_kill\
-	_lab3test.c\
+	_lab3\
 	_ln\
 	_ls\
 	_mkdir\
@@ -246,7 +246,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-	lab3test.c ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
+	lab3.c ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
 	printf.c umalloc.c uspinlock.c shm_cnt.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
