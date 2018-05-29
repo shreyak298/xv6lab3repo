@@ -51,7 +51,7 @@ trap(struct trapframe *tf)
   case T_PGFLT:
    while (rcr2() < KERNBASE - myproc()->stackSize*PGSIZE) {
 	if (allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0) {
-		cprint("not good, page fault \n");
+		cprintf("not good, page fault \n");
 			freevm(myproc()->pgdir);
 	}
     myproc()->stackSize = myproc()->stackSize + 1; 
