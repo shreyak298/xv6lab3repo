@@ -5,8 +5,8 @@
 
 int test(int n)
 { 
-   int x = n + 1;
    cprintf("entered test");
+   int x = n + 1;
    return x;
 }
 int main(int argc, char *argv[])
