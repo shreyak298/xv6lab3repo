@@ -5,7 +5,7 @@
 unsigned long returnZero(unsigned long);
 int fib(int);
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]){
 
     fib(100);
 
