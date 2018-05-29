@@ -1,11 +1,10 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include <stdio.h>
 
 int test(int n)
 { 
-   cprintf("entered test");
+   printf("entered test");
    int x = n + 1;
    return x;
 }
@@ -15,7 +14,7 @@ int main(int argc, char *argv[])
    pid=fork();
    
    if(pid==0){
-       cprintf("pid = 0");
+       printf("pid = 0");
        test(1);
        exit();
    }
