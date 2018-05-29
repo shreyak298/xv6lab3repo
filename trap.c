@@ -52,7 +52,7 @@ trap(struct trapframe *tf)
     while(rcr2() >= (KERNBASE - 1) - ((PGSIZE * myproc()->stackSize + 1) + 1)){
       if(allocuvm(myproc()->pgdir, PGROUNDDOWN(rcr2()), PGROUNDDOWN(rcr2()) + 8) == 0){
 	cprintf("this is bad \n");
-	//freevm(myproc()->pgdir);
+	freevm(myproc()->pgdir);
 	break;
       }
       myproc()->stackSize = myproc()->stackSize + 1;
