@@ -65,10 +65,10 @@ exec(char *path, char **argv)
   // Make the first inaccessible.  Use the second as the user stack.
   // begin CS153, lab3 changes
   sz = PGROUNDUP(sz);
-  tempSize = sz;
-  if((sz = allocuvm(pgdir, KERNBASE - PGSIZE, KERNBASE - 1)) == 0)
+  //tempSize = sz;
+  if((sz = allocuvm(pgdir, KERNBASE - 1, (KERNBASE - 1) - 1)) == 0)
     goto bad;
-  sz = tempSize;
+  //sz = tempSize;
   sp = KERNBASE - 1; 	// this allows stack to grow down
   curproc -> stackSize = 1;
   //end CS153, lab3 changes
