@@ -178,6 +178,7 @@ UPROGS=\
 	_zombie\
 	_shm_cnt\
 	_null\
+	_growingStack\
 	
 
 fs.img: mkfs README $(UPROGS)
