@@ -1,6 +1,7 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
+#include <stdio.h>
 
 int test(int n)
 { 
