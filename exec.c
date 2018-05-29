@@ -13,7 +13,7 @@ exec(char *path, char **argv)
   char *s, *last;
   int i, off;
   uint argc, sz, sp, ustack[3+MAXARG+1];
-  uint tempSize;	//CS153, lab3
+  //uint tempSize;	//CS153, lab3
   struct elfhdr elf;
   struct inode *ip;
   struct proghdr ph;
