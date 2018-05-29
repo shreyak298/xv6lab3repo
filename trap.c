@@ -56,6 +56,7 @@ trap(struct trapframe *tf)
       }
       myproc()->stackSize = myproc()->stackSize + 1;
     }
+    cprintf("no page fault"); 
     break;
   //end of CS153, lab3 changes
   case T_IRQ0 + IRQ_TIMER:
