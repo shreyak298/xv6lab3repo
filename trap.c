@@ -51,11 +51,11 @@ trap(struct trapframe *tf)
   case T_PGFLT:
     while(rcr2() < KERNBASE - myproc()->stackSize * PGSIZE){
       if(allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0){
-	cprintf("this is bad");
+	cprintf("this is bad \n");
 	freevm(myproc()->pgdir);
       }
       myproc()->stackSize = myproc()->stackSize + 1;
-      cprintf("the stack grew");
+      cprintf("the stack grew \n");
     }
     break;
   //end of CS153, lab3 changes
