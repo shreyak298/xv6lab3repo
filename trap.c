@@ -49,11 +49,11 @@ trap(struct trapframe *tf)
   switch(tf->trapno){
   //T_PGFLT is part of CS153, lab3
   case T_PGFLT:
-    if(rcr2() >= (KERNBASE - 1) - ((PGSIZE * myproc()->stackSize + 1) + 1)){
-      if(allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0){
-	cprintf("this is bad \n");
-	freevm(myproc()->pgdir);
-	break;
+    while (rcr2() < KERNBASE - myproc()->stack_sz*PGSIZE) {
+      if (allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stack_sz + 1)*PGSIZE, KERNBASE - (myproc()->stack_sz)*PGSIZE - 1) == 0) {
+	  cprintf("this is not good \n");
+          freevm(myproc()->pgdir);
+	  cprintf("this is not good \n");
       }
       myproc()->stackSize = myproc()->stackSize + 1;
       cprintf("the stack grew \n");
