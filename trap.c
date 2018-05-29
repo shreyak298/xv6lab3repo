@@ -49,7 +49,7 @@ trap(struct trapframe *tf)
   switch(tf->trapno){
   //T_PGFLT is part of CS153, lab3
   case T_PGFLT:
-    while(rcr2() < KERNBASE - myproc()->stackSize * PGSIZE){
+    while(rcr2() <= KERNBASE - myproc()->stackSize * PGSIZE){
       if(allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0){
 	cprintf("this is bad \n");
 	freevm(myproc()->pgdir);
