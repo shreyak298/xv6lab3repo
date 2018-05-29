@@ -339,7 +339,7 @@ copyuvm(pde_t *pgdir, uint sz, uint stackSize)
       goto bad;
     }
   }
-  for(i = KERNBASE - stackSize * PGSIZE; i < KERNBASE && stackSize > 0; i += PGSIZE){//CS153, lab3
+  for(i = (KERNBASE - 1) - PGSIZE + 1; stackSize > 0; stackSize--){//CS153, lab3
     if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)
       panic("copyuvm: pte should exist");
     if(!(*pte & PTE_P))
@@ -351,7 +351,7 @@ copyuvm(pde_t *pgdir, uint sz, uint stackSize)
     memmove(mem, (char*)P2V(pa), PGSIZE);
     if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) < 0)
       goto bad;
-      stackSize --;
+      i -= PGSIZE;
   }
   return d;
 
