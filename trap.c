@@ -54,9 +54,9 @@ trap(struct trapframe *tf)
       if(allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0){
 	freevm(myproc()->pgdir);
       }
+      cprintf("no page fault");
       myproc()->stackSize = myproc()->stackSize + 1;
     }
-    cprintf("no page fault"); 
     break;
   //end of CS153, lab3 changes
   case T_IRQ0 + IRQ_TIMER:
