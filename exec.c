@@ -13,7 +13,6 @@ exec(char *path, char **argv)
   char *s, *last;
   int i, off;
   uint argc, sz, sp, ustack[3+MAXARG+1];
-  uint tempSize;	//CS153, lab3
   struct elfhdr elf;
   struct inode *ip;
   struct proghdr ph;
@@ -65,12 +64,10 @@ exec(char *path, char **argv)
   // Make the first inaccessible.  Use the second as the user stack.
   // begin CS153, lab3 changes
   sz = PGROUNDUP(sz);
-  tempSize = sz;
-  if((sz = allocuvm(pgdir, KERNBASE - PGSIZE, KERNBASE - 1)) == 0)
+  if((allocuvm(pgdir, KERNBASE - PGSIZE, KERNBASE - 1)) == 0)
     goto bad;
-  sz = tempSize;
-  sp = KERNBASE - 1; 	// this allows stack to grow down
-  curproc -> stackSize = 1;
+  sp = KERNBASE - 1; 	// points to one below kernel space
+  curproc -> stackSize = 1; //sets process stackSize to 1
   //end CS153, lab3 changes
 
   // Push argument strings, prepare rest of stack in ustack.
