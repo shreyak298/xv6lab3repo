@@ -49,15 +49,15 @@ trap(struct trapframe *tf)
   switch(tf->trapno){
   //T_PGFLT is part of CS153, lab3 we basically added a case for page faults
   case T_PGFLT:
-   while (rcr2() < KERNBASE - myproc()->stackSize*PGSIZE) {
-	if (allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0) {
-		cprintf("not good, page fault \n");
+	while (rcr2() < KERNBASE - myproc()->stackSize*PGSIZE) {
+		if (allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0) { 	//check if page accessed right under current top of stack
+			cprintf("page fault, not good!!!! \n");
 			freevm(myproc()->pgdir);
+		}
+	cprintf("stack grew!!! \n");
+	myproc()->stackSize++;  
 	}
-    myproc()->stackSize++; 
-    cprintf("the stack grew \n");
-    }
-    break;
+	break; 
   //end of CS153, lab3 changes
   case T_IRQ0 + IRQ_TIMER:
     if(cpuid() == 0){
