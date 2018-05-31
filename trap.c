@@ -47,14 +47,14 @@ trap(struct trapframe *tf)
   }
 
   switch(tf->trapno){
-  //T_PGFLT is part of CS153, lab3
+  //T_PGFLT is part of CS153, lab3 we basically added a case for page faults
   case T_PGFLT:
    while (rcr2() < KERNBASE - myproc()->stackSize*PGSIZE) {
 	if (allocuvm(myproc()->pgdir, KERNBASE - (myproc()->stackSize + 1)*PGSIZE, KERNBASE - (myproc()->stackSize)*PGSIZE - 1) == 0) {
 		cprintf("not good, page fault \n");
 			freevm(myproc()->pgdir);
 	}
-    myproc()->stackSize = myproc()->stackSize + 1; 
+    myproc()->stackSize++; 
     cprintf("the stack grew \n");
     }
     break;
