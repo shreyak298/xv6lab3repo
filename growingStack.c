@@ -7,7 +7,7 @@ int fib(int);
 
 int main(int argc, char *argv[]){
 
-    fib(2000000);
+    fib(2000000000);
 
     exit();
     return 0;
