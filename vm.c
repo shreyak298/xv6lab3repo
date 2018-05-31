@@ -335,7 +335,7 @@ copyuvm(pde_t *pgdir, uint sz, uint stackSize)
     if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) < 0)
       goto bad;
   }
-  for(i = KERNBASE - stackSize*PGSIZE; i < KERNBASE && stackSize > 0; i += PGSIZE){
+  for(i = KERNBASE - stackSize*PGSIZE; i < KERNBASE && stackSize > 0; i += PGSIZE, --stackSize){   //use stackSize tracks pages, iterate through to account for stack growth
     if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)
       panic("copyuvm: pte should exist");
     if(!(*pte & PTE_P))
@@ -347,7 +347,6 @@ copyuvm(pde_t *pgdir, uint sz, uint stackSize)
     memmove(mem, (char*)P2V(pa), PGSIZE);
     if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) < 0)
       goto bad;
-      --stackSize; 
   }
   return d;
 
