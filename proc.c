@@ -190,7 +190,7 @@ fork(void)
   }
 
   // Copy process state from proc.
-  if((np->pgdir = copyuvm(curproc->pgdir, curproc->sz, curproc ->stackSize)) == 0){ //CS153, lab3
+  if((np->pgdir = copyuvm(curproc->pgdir, curproc->sz, curproc ->stackSize)) == 0){ //CS153, lab3 3rd parameter accounts for total stack pgs
     kfree(np->kstack);
     np->kstack = 0;
     np->state = UNUSED;
